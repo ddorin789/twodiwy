@@ -25,6 +25,8 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  position: relative;
+  z-index: 10;
 }
 
 .input-row {
@@ -47,6 +49,8 @@ h1 {
   border: 1px solid #007bff;
   background-color: #ffffff;
   box-sizing: border-box;
+  position: relative;
+  z-index: 10;
 }
 
 .input-box:focus {
@@ -59,6 +63,8 @@ h1 {
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
+  position: relative;
+  z-index: 10;
 }
 
 button {
@@ -70,6 +76,8 @@ button {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  position: relative;
+  z-index: 10;
 }
 
 button:hover {
@@ -193,7 +201,7 @@ button:hover {
   width: 100%;
   max-width: 2000px;
   box-sizing: border-box;
-  z-index: 1;
+  z-index: 0;
   background-color: #f7f2e9;
 }
 
