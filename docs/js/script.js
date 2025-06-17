@@ -18,7 +18,6 @@ const translations = {
     thanksTitle: 'Thank you so much!',
     thanksMsg: 'Your valuable idea has been successfully submitted.<br>We truly appreciate your contribution.',
     backHome: 'Back to Home',
-    copyright: 'Written by 2dy.ddorin',
     socialTitle: 'This is my social media!'
   },
   ko: {
@@ -32,7 +31,6 @@ const translations = {
     thanksTitle: '감사합니다!',
     thanksMsg: '소중한 아이디어가 성공적으로 제출되었습니다.<br>진심으로 감사드립니다.',
     backHome: '처음으로',
-    copyright: '작성자: 2dy.ddorin',
     socialTitle: '이것이 제 소셜 미디어입니다!'
   },
   ja: {
@@ -46,7 +44,6 @@ const translations = {
     thanksTitle: 'ありがとうございます！',
     thanksMsg: 'あなたの貴重なアイデアが正常に送信されました。<br>ご協力に心より感謝いたします。',
     backHome: '最初に戻る',
-    copyright: '作成者: 2dy.ddorin',
     socialTitle: '僕のソーシャルメディアです'
   },
   es: {
@@ -60,7 +57,6 @@ const translations = {
     thanksTitle: '¡Muchas gracias!',
     thanksMsg: 'Tu valiosa idea se ha enviado correctamente.<br>Te agradecemos sinceramente tu contribución.',
     backHome: 'Volver al inicio',
-    copyright: 'Escrito por 2dy.ddorin',
     socialTitle: '¡Esta es mi red social!'
   },
   zh: {
@@ -74,7 +70,6 @@ const translations = {
     thanksTitle: '非常感谢！',
     thanksMsg: '您的宝贵想法已成功提交。<br>我们由衷感谢您的贡献。',
     backHome: '返回首页',
-    copyright: '作者: 2dy.ddorin',
     socialTitle: '这是我的社交媒体'
   }
 };
@@ -91,7 +86,6 @@ function setLanguage(lang) {
   document.querySelector('#thanks-container h2').innerText = t.thanksTitle;
   document.querySelector('#thanks-container p').innerHTML = t.thanksMsg;
   document.querySelector('#thanks-container button').innerText = t.backHome;
-  // document.querySelector('.copyright').innerText = t.copyright; // 'Written by'는 번역하지 않도록 주석 처리
   
   // 소셜 미디어 문구 번역
   const socialTitle = document.querySelector('.social-title');
