@@ -1,4 +1,3 @@
-// import { createClient } from '@supabase/supabase-js' // 삭제
 
 // Supabase 초기화
 const supabaseUrl = 'https://toxjfcqzdoxjjtiaihml.supabase.co'
@@ -91,7 +90,6 @@ function setLanguage(lang) {
   document.querySelector('#thanks-container h2').innerText = t.thanksTitle;
   document.querySelector('#thanks-container p').innerHTML = t.thanksMsg;
   document.querySelector('#thanks-container button').innerText = t.backHome;
-  // document.querySelector('.copyright').innerText = t.copyright; // 'Written by'는 번역하지 않도록 주석 처리
   
   // 소셜 미디어 문구 번역
   const socialTitle = document.querySelector('.social-title');
