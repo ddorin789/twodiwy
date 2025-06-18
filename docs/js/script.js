@@ -98,8 +98,19 @@ langSelect.addEventListener('change', (e) => {
   setLanguage(e.target.value);
 });
 
-// 페이지 최초 로딩 시 영어로 설정
-setLanguage('en');
+// DOM이 완전히 로드된 후 초기화
+document.addEventListener('DOMContentLoaded', function() {
+  // 페이지 최초 로딩 시 영어로 설정
+  setLanguage('en');
+  
+  // 언어 선택 이벤트 리스너 다시 설정
+  const langSelect = document.getElementById('lang-select');
+  if (langSelect) {
+    langSelect.addEventListener('change', (e) => {
+      setLanguage(e.target.value);
+    });
+  }
+});
 
 function validateEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
