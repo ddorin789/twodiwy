@@ -1,3 +1,4 @@
+// import { createClient } from '@supabase/supabase-js' // 삭제
 
 // Supabase 초기화
 const supabaseUrl = 'https://toxjfcqzdoxjjtiaihml.supabase.co'
@@ -7,8 +8,8 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 // 언어별 번역 데이터
 const translations = {
   en: {
-    title: 'Give me idea',
-    subtitle: "I'm an aspiring IT CEO eager to build innovative apps and websites. <br />I'm looking for creative ideas or common tech-related pain points to solve. <br/>👇",
+    title: 'Tell me your Problem',
+    subtitle: "I'm an aspiring IT CEO who wants to create innovative apps and websites. <br />From minor inconveniences that no one seems to care about to ideas you think would be nice to have, please feel free to share anything! <br/>👇",
     emailLabel: 'Email (Optional)',
     emailPlaceholder: 'Enter your email address',
     ideaLabel: 'Your Idea',
@@ -20,8 +21,8 @@ const translations = {
     socialTitle: 'This is my social media!'
   },
   ko: {
-    title: '아이디어를 주세요',
-    subtitle: '저는 혁신적인 앱과 웹사이트를 만들고 싶은 예비 IT CEO입니다.<br>창의적인 아이디어나 불편했던 점을 알려주세요.<br>👇',
+    title: '당신의 문제를 알려주세요',
+    subtitle: '저는 혁신적인 앱과 웹사이트를 만들고 싶은 예비 IT CEO입니다. <br />누구도 신경 쓰지 않을 것 같은 사소한 불편함부터, 혹시 이런 게 있으면 좋겠다 싶은 아이디어까지, 뭐든 편하게 말씀해주세요! <br/>👇',
     emailLabel: '이메일 (선택)',
     emailPlaceholder: '이메일 주소를 입력하세요',
     ideaLabel: '아이디어',
@@ -33,8 +34,8 @@ const translations = {
     socialTitle: '이것이 제 소셜 미디어입니다!'
   },
   ja: {
-    title: 'アイデアをください',
-    subtitle: '私は革新的なアプリやウェブサイトを作りたいIT起業家の卵です。<br>あなたのクリエイティブなアイデアや不便だった点を教えてください。<br>👇',
+    title: 'あなたの問題を教えてください',
+    subtitle: '私は革新的なアプリとウェブサイトを作りたいIT CEO志望者です。 <br />誰も気にしないような些細な不便さから、こんなのあったらいいなと思うアイデアまで、何でも気軽に教えてください！ <br/>👇',
     emailLabel: 'メール（任意）',
     emailPlaceholder: 'メールアドレスを入力してください',
     ideaLabel: 'アイデア',
@@ -46,8 +47,8 @@ const translations = {
     socialTitle: '僕のソーシャルメディアです'
   },
   es: {
-    title: 'Dame una idea',
-    subtitle: 'Soy un futuro CEO de TI que quiere crear aplicaciones y sitios web innovadores.<br>Por favor, comparte tus ideas creativas o problemas que hayas experimentado.<br>👇',
+    title: 'Cuéntame tu Problema',
+    subtitle: 'Soy un aspirante a CEO de IT que quiere crear aplicaciones y sitios web innovadores. <br />Desde pequeñas molestias que a nadie le importan hasta ideas que crees que estarían bien tener, ¡por favor comparte lo que quieras! <br/>👇',
     emailLabel: 'Correo electrónico (opcional)',
     emailPlaceholder: 'Introduce tu correo electrónico',
     ideaLabel: 'Tu idea',
@@ -59,8 +60,8 @@ const translations = {
     socialTitle: '¡Esta es mi red social!'
   },
   zh: {
-    title: '请给我一个想法',
-    subtitle: '我是一名渴望打造创新应用和网站的IT创业者。<br>欢迎分享你的创意或遇到的不便之处。<br>👇',
+    title: '告诉我你的问题',
+    subtitle: '我是一位想要创造创新应用和网站的准IT CEO。 <br />从没人会在意的微小不便到你觉得有就好了的想法，请随意分享任何内容！ <br/>👇',
     emailLabel: '邮箱（可选）',
     emailPlaceholder: '请输入你的邮箱地址',
     ideaLabel: '你的想法',
