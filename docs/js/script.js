@@ -92,22 +92,75 @@ function setLanguage(lang) {
   socialTitle.textContent = t.socialTitle;
 }
 
-// 언어 선택 UI 이벤트
-const langSelect = document.getElementById('lang-select');
-langSelect.addEventListener('change', (e) => {
-  setLanguage(e.target.value);
-});
+// 드롭다운 언어 선택 UI 동작
+const langData = {
+  en: { icon: '🇺🇸', text: 'English' },
+  ko: { icon: '🇰🇷', text: '한국어' },
+  ja: { icon: '🇯🇵', text: '日本語' },
+  es: { icon: '🇪🇸', text: 'Español' },
+  zh: { icon: '🇨🇳', text: '中文' }
+};
 
-// DOM이 완전히 로드된 후 초기화
+function setLangDropdownUI(lang) {
+  // 토글 버튼에 현재 언어 표시
+  const icon = langData[lang]?.icon || '';
+  const text = langData[lang]?.text || '';
+  document.getElementById('selectedLangIcon').textContent = icon;
+  document.getElementById('selectedLangText').textContent = text;
+  // 리스트에서 선택된 버튼 강조
+  document.querySelectorAll('.lang-dropdown-list .lang-btn').forEach(btn => {
+    if (btn.getAttribute('data-lang') === lang) {
+      btn.classList.add('selected');
+    } else {
+      btn.classList.remove('selected');
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-  // 페이지 최초 로딩 시 영어로 설정
   setLanguage('en');
-  
-  // 언어 선택 이벤트 리스너 다시 설정
-  const langSelect = document.getElementById('lang-select');
-  if (langSelect) {
-    langSelect.addEventListener('change', (e) => {
-      setLanguage(e.target.value);
+  setLangDropdownUI('en');
+
+  const toggle = document.getElementById('langDropdownToggle');
+  const list = document.getElementById('langDropdownList');
+  let dropdownOpen = false;
+
+  function closeDropdown() {
+    dropdownOpen = false;
+    if (list) list.style.display = 'none';
+  }
+
+  if (toggle && list) {
+    toggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      dropdownOpen = !dropdownOpen;
+      list.style.display = dropdownOpen ? 'flex' : 'none';
+    });
+    // 바깥 클릭 시 닫기
+    document.addEventListener('click', closeDropdown);
+    list.addEventListener('click', function(e) { e.stopPropagation(); });
+  }
+
+  // 언어 버튼 클릭 이벤트 (이벤트 위임)
+  if (list) {
+    list.addEventListener('click', function(e) {
+      const btn = e.target.closest('.lang-btn');
+      if (btn) {
+        const lang = btn.getAttribute('data-lang');
+        setLanguage(lang);
+        setLangDropdownUI(lang);
+        closeDropdown();
+      }
+    });
+  }
+
+  // 사이드 메뉴가 닫힐 때 드롭다운도 닫힘
+  const sideMenu = document.getElementById('side-menu');
+  if (sideMenu) {
+    sideMenu.addEventListener('transitionend', function() {
+      if (!sideMenu.classList.contains('open')) {
+        closeDropdown();
+      }
     });
   }
 });
