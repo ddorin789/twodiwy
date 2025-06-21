@@ -1,3 +1,4 @@
+/* ===== 기본 레이아웃 및 전역 스타일 ===== */
 body {
   font-family: sans-serif;
   background-color: #f7f2e9;
@@ -9,16 +10,18 @@ body {
   min-height: 100vh;
   box-sizing: border-box;
   padding-bottom: 120px;
-  background: #fbeee2;
+  background: #fbeee2; /* 메인 배경색 */
 }
 
+/* ===== 제목 스타일 ===== */
 h1 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(1.5rem, 4vw, 2.5rem); /* 반응형 폰트 크기 */
   margin: 0px 0 20px 0;
   padding: 0 20px;
   text-align: center;
 }
 
+/* ===== 입력 폼 컨테이너 ===== */
 .input-container {
   width: 100%;
   max-width: 500px;
@@ -30,18 +33,21 @@ h1 {
   z-index: 10;
 }
 
+/* ===== 입력 행 스타일 ===== */
 .input-row {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
+/* ===== 입력 라벨 ===== */
 .input-label {
   font-size: 14px;
   color: #666;
   margin-left: 5px;
 }
 
+/* ===== 입력 박스 ===== */
 .input-box {
   padding: 14px;
   font-size: 16px;
@@ -54,12 +60,14 @@ h1 {
   z-index: 10;
 }
 
+/* ===== 입력 박스 포커스 상태 ===== */
 .input-box:focus {
   outline: none;
   border-color: #007bff;
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
 }
 
+/* ===== 제출 버튼 컨테이너 ===== */
 .submit-container {
   display: flex;
   justify-content: flex-end;
@@ -68,6 +76,7 @@ h1 {
   z-index: 10;
 }
 
+/* ===== 버튼 기본 스타일 ===== */
 button {
   padding: 12px 24px;
   font-size: 16px;
@@ -81,19 +90,22 @@ button {
   z-index: 10;
 }
 
+/* ===== 버튼 호버 효과 ===== */
 button:hover {
   background-color: #0056b3;
 }
 
+/* ===== 부제목 ===== */
 .subtitle {
   margin: 0px 0;
-  font-size: clamp(1rem, 2vw, 1.1rem);
+  font-size: clamp(1rem, 2vw, 1.125rem);
   color: #555;
   text-align: center;
   padding: 0 20px;
   line-height: 1.5;
 }
 
+/* ===== 토스트 메시지 컨테이너 ===== */
 .toast-container {
   position: fixed;
   top: 20px;
@@ -105,6 +117,7 @@ button:hover {
   z-index: 1000;
 }
 
+/* ===== 토스트 메시지 ===== */
 .message {
   width: 100%;
   max-width: 400px;
@@ -121,18 +134,21 @@ button:hover {
   will-change: transform, opacity;
 }
 
+/* ===== 에러 메시지 스타일 ===== */
 .message.error {
   background-color: #fff5f5;
   border: 1px solid #feb2b2;
   color: #c53030;
 }
 
+/* ===== 성공 메시지 스타일 ===== */
 .message.success {
   background-color: #f0fff4;
   border: 1px solid #9ae6b4;
   color: #2f855a;
 }
 
+/* ===== 페이드인 애니메이션 ===== */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -144,6 +160,7 @@ button:hover {
   }
 }
 
+/* ===== 페이드아웃 애니메이션 ===== */
 @keyframes fadeOut {
   from {
     opacity: 1;
@@ -155,10 +172,12 @@ button:hover {
   }
 }
 
+/* ===== 메시지 숨김 상태 ===== */
 .message.hide {
   animation: fadeOut 0.4s ease forwards;
 }
 
+/* ===== 모바일 반응형 스타일 (600px 이하) ===== */
 @media (max-width: 600px) {
   body {
     padding: 10px;
@@ -177,6 +196,7 @@ button:hover {
   }
 }
 
+/* ===== 작은 모바일 반응형 스타일 (400px 이하) ===== */
 @media (max-width: 400px) {
   h1 {
     font-size: 2rem;
@@ -187,78 +207,87 @@ button:hover {
   }
 }
 
+/* ===== 가로 스크롤 방지 ===== */
 html, body {
   overflow-x: hidden;
 }
 
+/* ===== 푸터 스타일 ===== */
 .footer {
   background-color: #fbeee2 !important;
   gap: 0;
   left: 0;
   right: 0;
   margin: 0;
-  padding: 0;
+  padding: 0 40px; /* 기본 좌우 패딩으로 변경 */
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-end;
+  justify-content: space-between; /* space-between으로 변경하여 양쪽 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
   color: #666;
   width: 100vw;
   box-sizing: border-box;
   z-index: 0;
   min-height: 0;
-  height: auto;
+  height: 72px; /* 푸터 높이를 0.9배로 조정 (80px -> 72px) */
 }
+
+/* ===== 푸터 내부 요소 정렬 ===== */
 .footer > * {
   flex: 0 1 auto;
 }
 
+/* ===== 저작권 텍스트 ===== */
 .copyright {
-  font-size: 16px;
+  font-size: 16px; /* 폰트 크기를 0.9배로 조정 (18px -> ~16px) */
   margin: 0;
   padding: 0;
   display: flex;
   align-items: center;
   height: 100%;
-  white-space: pre-line;
-  color: #666;
+  white-space: pre-line; /* 줄바꿈 허용 */
+  margin-left: 10vw; /* 왼쪽 마진 추가하여 간격 조정 */
 }
 
+/* ===== 소셜 미디어 섹션 ===== */
 .social-section {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 10px;
-  width: auto;
-  margin-left: 0;
+  gap: 14px; /* 간격을 0.9배로 조정 (15px -> ~14px) */
+  width: auto !important;
+  margin-left: 0 !important;
   justify-content: center;
   height: 100%;
   padding: 0;
+  margin-right: 10vw; /* 오른쪽 마진 추가하여 간격 조정 */
 }
 
+/* ===== 소셜 미디어 제목 ===== */
 .social-title {
-  font-size: 1.1rem;
+  font-size: 16px; /* 폰트 크기를 0.9배로 조정 (18px -> ~16px) */
   color: #666;
   margin: 0;
-  font-size: 16px;
   font-weight: 500;
   text-align: right;
 }
 
+/* ===== 소셜 미디어 아이콘 컨테이너 ===== */
 .social-icons {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 14px; /* 아이콘 간격을 0.9배로 조정 (15px -> ~14px) */
   width: 100%;
 }
 
+/* ===== 소셜 미디어 링크 ===== */
 .social-link {
   color: #fff;
-  font-size: 16px;
+  font-size: 20px; /* 아이콘 폰트 크기를 키워 중심이 잘 맞아보이도록 조정 */
   transition: all 0.3s ease;
-  width: 35px;
-  height: 35px;
+  width: 36px; /* 아이콘 너비를 0.9배로 조정 (40px -> 36px) */
+  height: 36px; /* 아이콘 높이를 0.9배로 조정 (40px -> 36px) */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -267,12 +296,18 @@ html, body {
   text-decoration: none;
 }
 
+.social-link i {
+  line-height: 1; /* 아이콘 자체의 줄 높이를 조정하여 수직 정렬을 미세하게 보정합니다. */
+}
+
+/* ===== 소셜 미디어 링크 호버 효과 ===== */
 .social-link:hover {
   color: #fff;
   background-color: #0056b3;
   transform: translateY(-2px);
 }
 
+/* ===== 모바일 푸터 반응형 ===== */
 @media (max-width: 600px) {
   .footer {
     flex-direction: column;
@@ -285,17 +320,20 @@ html, body {
   }
 }
 
+/* ===== 감사 메시지 컨테이너 ===== */
 #thanks-container h2 {
   font-size: 2.8rem;
   margin: 40px 0 20px 0;
   color: #007bff;
   font-weight: bold;
 }
+
 #thanks-container p {
   font-size: 1.5rem;
   margin-bottom: 40px;
   color: #333;
 }
+
 #thanks-container button {
   font-size: 1.05rem;
   padding: 13px 28px;
@@ -306,107 +344,137 @@ html, body {
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   transition: background 0.2s;
 }
+
 #thanks-container button:hover {
   background: #007bff;
 }
 
+/* ===== 메인 로고 ===== */
 .main-logo {
   display: block;
   margin: 20px auto 8px auto;
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
   image-rendering: pixelated;
 }
 
+/* ===== 메인 헤더 ===== */
 .main-header {
   width: 100%;
-  background: #fff;
+  background: #fff; /* 흰색 배경 */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 0 5px 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 9px 0 9px 0;
   margin-top: 0;
   position: relative;
   z-index: 10;
 }
+
+/* ===== 헤더 가상 요소 (사용 안함) ===== */
 .main-header::before {
   content: '';
   display: none;
 }
 
+/* ===== 헤더 왼쪽 영역 ===== */
 .header-left {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-left: 200px;
+  gap: 12px;
+  margin-left: 380px;
 }
 
+.header-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.header-logo-link:hover {
+  background-color: #f0f0f0; /* 호버 시 배경색 변경 */
+}
+
+/* ===== 헤더 로고 ===== */
 .header-logo {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
+  width: 30px;
+  height: 30px;
 }
 
+/* ===== 헤더 제목 ===== */
 .header-title {
   font-size: 0.95rem;
-  font-weight: 700;
-  color: #222;
+  font-weight: normal;
+  color: #222; /* 검은색 텍스트 */
+  line-height: 1; /* 텍스트의 수직 정렬을 위해 line-height를 조정합니다. */
 }
 
+/* ===== 헤더 오른쪽 영역 ===== */
 .header-right {
   display: flex;
   align-items: center;
-  gap: 4px;
-  margin-right: 60px;
+  gap: 10px;
+  margin-right: 380px;
 }
 
+/* ===== 헤더 버튼 기본 스타일 ===== */
 .header-btn {
   background: #fff;
   border: 1px solid #ddd;
-  border-radius: 7px;
-  padding: 4px 12px;
-  font-size: 0.92rem;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: background 0.2s, border 0.2s;
-  height: 32px;
-  min-width: 60px;
+  height: 36px;
+  min-width: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* ===== 구독 버튼 스타일 ===== */
 .header-btn.subscribe, .subscribe-btn {
   background: #007bff;
   color: #fff;
   border: none;
-  min-width: 80px;
+  min-width: 90px;
 }
 
+/* ===== 헤더 버튼 호버 효과 ===== */
 .header-btn:hover {
   background: #f0f0f0;
 }
 
+/* ===== 구독 버튼 호버 효과 ===== */
 .header-btn.subscribe:hover, .subscribe-btn:hover {
   background: #0056b3;
 }
 
+/* ===== 메뉴 버튼 ===== */
 .header-btn.menu-btn {
   background: #fff;
   color: #222;
   border: 1px solid #ddd;
-  padding: 4px 8px;
+  padding: 0;
   font-size: 1.1rem;
-  border-radius: 7px;
+  border-radius: 8px;
   width: 36px;
-  height: 32px;
+  height: 36px;
   min-width: unset;
 }
 
+/* ===== 메뉴 버튼 호버 효과 ===== */
 .header-btn.menu-btn:hover {
   background: #f0f0f0;
 }
 
+/* ===== 헤더 언어 선택 ===== */
 .header-lang-select {
   font-size: 0.95rem;
   padding: 4px 8px 4px 28px;
@@ -420,6 +488,7 @@ html, body {
   font-weight: normal;
 }
 
+/* ===== 사이드 메뉴 ===== */
 .side-menu {
   position: fixed;
   top: 0;
@@ -434,15 +503,21 @@ html, body {
   flex-direction: column;
   padding: 24px 20px 20px 20px;
 }
+
+/* ===== 사이드 메뉴 열림 상태 ===== */
 .side-menu.open {
   right: 0;
 }
+
+/* ===== 사이드 메뉴 콘텐츠 ===== */
 .side-menu-content {
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin-top: 32px;
 }
+
+/* ===== 사이드 메뉴 닫기 버튼 ===== */
 .close-menu-btn {
   background: none;
   border: none;
@@ -462,12 +537,14 @@ html, body {
   justify-content: center;
 }
 
+/* ===== 사이드 메뉴 닫기 버튼 호버 효과 ===== */
 .close-menu-btn:hover {
   background: #f0f0f0;
   color: #222;
   transform: scale(1.12);
 }
 
+/* ===== 사이드 메뉴 배경 ===== */
 .side-menu-backdrop {
   display: none;
   position: fixed;
@@ -478,6 +555,8 @@ html, body {
   background: rgba(0,0,0,0.15);
   z-index: 1500;
 }
+
+/* ===== 사이드 언어 선택 ===== */
 .side-lang-select {
   font-size: 1rem;
   padding: 6px 10px 6px 32px;
@@ -491,12 +570,15 @@ html, body {
   font-weight: normal;
 }
 
+/* ===== 언어 버튼 그룹 ===== */
 .lang-btn-group {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-top: 20px;
 }
+
+/* ===== 언어 버튼 ===== */
 .lang-btn {
   display: flex;
   align-items: center;
@@ -510,20 +592,27 @@ html, body {
   transition: background 0.2s, border 0.2s, color 0.2s;
   color: #222;
 }
+
+/* ===== 언어 버튼 선택/호버 상태 ===== */
 .lang-btn.selected, .lang-btn:hover {
   background: #007bff;
   color: #fff;
   border: 1px solid #007bff;
 }
+
+/* ===== 언어 버튼 아이콘 ===== */
 .lang-btn span {
   font-size: 1.2rem;
 }
 
+/* ===== 언어 드롭다운 컨테이너 ===== */
 .lang-dropdown {
   position: relative;
   width: 100%;
   z-index: 3001;
 }
+
+/* ===== 언어 드롭다운 토글 버튼 ===== */
 .lang-dropdown-toggle {
   width: 100%;
   display: flex;
@@ -540,13 +629,19 @@ html, body {
   z-index: 3002;
   position: relative;
 }
+
+/* ===== 언어 드롭다운 토글 포커스 ===== */
 .lang-dropdown-toggle:focus {
   outline: 2px solid #007bff;
 }
+
+/* ===== 언어 드롭다운 토글 호버 ===== */
 .lang-dropdown-toggle:hover {
   background: #007bff; 
   color: #fff;
 }
+
+/* ===== 언어 드롭다운 리스트 ===== */
 .lang-dropdown-list {
   position: absolute;
   top: 110%;
@@ -565,6 +660,8 @@ html, body {
   overflow-y: auto;
   min-width: 180px;
 }
+
+/* ===== 언어 드롭다운 리스트 버튼 ===== */
 .lang-dropdown-list .lang-btn {
   display: flex;
   align-items: center;
@@ -581,12 +678,16 @@ html, body {
   transition: background 0.18s, color 0.18s;
   cursor: pointer;
 }
+
+/* ===== 언어 드롭다운 리스트 버튼 선택/호버 ===== */
 .lang-dropdown-list .lang-btn.selected,
 .lang-dropdown-list .lang-btn:hover {
   background: #007bff;
   color: #fff;
   border-radius: 0;
 }
+
+/* ===== 언어 드롭다운 리스트 버튼 아이콘 ===== */
 .lang-dropdown-list .lang-btn span {
   display: inline-block;
   width: 22px;
@@ -596,6 +697,7 @@ html, body {
   object-fit: contain;
 }
 
+/* ===== 하단 흰색 박스 ===== */
 .bottom-white-box {
   width: 100%;
   background: #fff;
@@ -608,6 +710,7 @@ html, body {
   flex-shrink: 0;
 }
 
+/* ===== 큰 박스 (임시) ===== */
 .big-box {
   width: 80%;
   height: 800px;
@@ -620,6 +723,7 @@ html, body {
   justify-content: center;
 }
 
+/* ===== 큰 박스 텍스트 스타일 ===== */
 .big-box {
   font-size: 3rem;
   font-weight: bold;
@@ -627,81 +731,85 @@ html, body {
   letter-spacing: 2px;
 }
 
+/* ===== 기본 HTML/BODY 설정 ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
+
+/* ===== 메인 콘텐츠 ===== */
 .main-content {
   flex: 1 0 auto;
 }
+
+/* ===== 푸터 기본 설정 ===== */
 .footer {
   flex-shrink: 0;
 }
 
-/* Sloth Bytes 스타일 추가 */
+/* ===== 헤더 스타일 (중복 제거용) ===== */
 .header {
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 32px;
-  height: 64px;
+  /* 기존 .main-header와 동일한 스타일 */
 }
+
+/* ===== 헤더 왼쪽 영역 (중복 제거용) ===== */
 .header-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  /* 기존과 동일 */
 }
+
+/* ===== 헤더 로고 (중복 제거용) ===== */
 .header-logo {
-  width: 30px;
-  height: 30px;
-  border-radius: 0%;
+  /* 기존과 동일 */
 }
+
+/* ===== 헤더 제목 (중복 제거용) ===== */
 .header-title {
-  font-size: 1.0rem;
-  font-weight: bold;
-  color: #222;
+  /* 기존과 동일 */
 }
+
+/* ===== 헤더 광고 (사용 안함) ===== */
 .header-advertise {
   margin-left: 24px;
   color: #888;
   font-size: 1rem;
   cursor: pointer;
 }
+
+/* ===== 헤더 오른쪽 영역 (중복 제거용) ===== */
 .header-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  /* 기존과 동일 */
 }
+
+/* ===== 헤더 버튼 (중복 제거용) ===== */
 .header-btn {
-  background: #fff;
-  border: 1.5px solid #dbeafe;
-  border-radius: 8px;
-  padding: 8px 18px;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #222;
-  cursor: pointer;
-  margin-left: 4px;
-  transition: background 0.2s, color 0.2s, border 0.2s;
+  /* 기존과 동일 */
 }
+
+/* ===== 구독 버튼 (중복 제거용) ===== */
 .header-btn.subscribe, .subscribe-btn {
-  background: #007bff;
-  color: #fff;
-  border: 1.5px solid #007bff;
+  /* 기존과 동일 */
 }
+
+/* ===== 구독 버튼 호버 (중복 제거용) ===== */
 .header-btn.subscribe:hover, .subscribe-btn:hover {
-  background: #0056b3;
-  border: 1.5px solid #0056b3;
+  /* 기존과 동일 */
 }
+
+/* ===== 로그인 버튼 ===== */
 .header-btn.login {
   background: #fff;
   color: #222;
-  border: 1.5px solid #dbeafe;
+  border: 1px solid #ddd;
 }
 
+/* ===== 메인 섹션 (사용 안함) ===== */
 .main-section {
   display: flex;
   flex-direction: column;
@@ -709,17 +817,23 @@ body {
   margin-top: 48px;
   margin-bottom: 32px;
 }
+
+/* ===== 메인 로고 섹션 (사용 안함) ===== */
 .main-logo-section {
   width: 90px;
   height: 90px;
   margin-bottom: 12px;
 }
+
+/* ===== 메인 제목 섹션 (사용 안함) ===== */
 .main-title-section {
   font-size: 3.2rem;
   font-weight: bold;
   margin-bottom: 8px;
   color: #222;
 }
+
+/* ===== 메인 설명 섹션 (사용 안함) ===== */
 .main-desc-section {
   font-size: 1.2rem;
   color: #222;
@@ -727,11 +841,15 @@ body {
   max-width: 600px;
   margin-bottom: 24px;
 }
+
+/* ===== 구독 폼 (사용 안함) ===== */
 .subscribe-form {
   display: flex;
   gap: 0;
   margin-bottom: 24px;
 }
+
+/* ===== 이메일 입력 (사용 안함) ===== */
 .email-input {
   padding: 12px 16px;
   font-size: 1.1rem;
@@ -740,6 +858,8 @@ body {
   outline: none;
   min-width: 280px;
 }
+
+/* ===== 구독 버튼 (사용 안함) ===== */
 .subscribe-btn {
   padding: 12px 24px;
   font-size: 1.1rem;
@@ -750,17 +870,23 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
+
+/* ===== 소셜 섹션 (사용 안함) ===== */
 .socials-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
 }
+
+/* ===== 소셜 아이콘 섹션 (사용 안함) ===== */
 .social-icons-section {
   display: flex;
   gap: 16px;
   margin-top: 4px;
 }
+
+/* ===== 소셜 버튼 (사용 안함) ===== */
 .social-btn {
   background: #e3eafc;
   border-radius: 50%;
@@ -773,16 +899,20 @@ body {
   color: #2563eb;
   transition: background 0.2s, color 0.2s;
 }
+
+/* ===== 소셜 버튼 호버 (사용 안함) ===== */
 .social-btn:hover {
   background: #007bff;
   color: #fff;
 }
 
+/* ===== 포스트 영역 (비어있음) ===== */
 .posts {
   min-height: 120px;
   margin: 32px 0;
 }
 
+/* ===== 푸터 (중복 제거용) ===== */
 .footer {
   background: #fff;
   border-top: 1px solid #eee;
@@ -793,32 +923,44 @@ body {
   margin-top: 48px;
   flex-wrap: wrap;
 }
+
+/* ===== 푸터 왼쪽 ===== */
 .footer-left {
   display: flex;
   align-items: flex-start;
   gap: 16px;
 }
+
+/* ===== 푸터 로고 ===== */
 .footer-logo {
   width: 48px;
   height: 48px;
   border-radius: 50%;
 }
+
+/* ===== 푸터 중앙 ===== */
 .footer-center {
   display: flex;
   flex-direction: column;
   gap: 8px;
   min-width: 120px;
 }
+
+/* ===== 푸터 오른쪽 ===== */
 .footer-right {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 12px;
 }
+
+/* ===== 푸터 구독 폼 ===== */
 .footer-subscribe {
   display: flex;
   gap: 0;
 }
+
+/* ===== 푸터 링크 ===== */
 .footer-links {
   display: flex;
   gap: 12px;
@@ -826,14 +968,19 @@ body {
   color: #888;
   margin-top: 8px;
 }
+
+/* ===== 푸터 링크 앵커 ===== */
 .footer-links a {
   color: #888;
   text-decoration: underline;
 }
+
+/* ===== 푸터 링크 스팬 ===== */
 .footer-links span {
   color: #bbb;
 }
 
+/* ===== 모바일 푸터 반응형 (900px 이하) ===== */
 @media (max-width: 900px) {
   .footer {
     flex-direction: column;
@@ -841,11 +988,13 @@ body {
     gap: 24px;
     padding: 32px 4vw 24px 4vw;
   }
+  
   .footer-right {
     align-items: flex-start;
   }
 }
 
+/* ===== 사용하지 않는 스타일 초기화 ===== */
 .main-section, .main-logo-section, .main-title-section, .main-desc-section, .subscribe-form, .email-input, .subscribe-btn, .socials-section, .social-icons-section, .social-btn {
   all: unset;
 }
