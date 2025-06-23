@@ -9,7 +9,7 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 const translations = {
   en: {
     title: 'Tell me your Problem',
-    subtitle: "I'm an aspiring IT CEO who wants to create innovative apps and websites. <br />From minor inconveniences that no one seems to care about to ideas you think would be nice to have, please feel free to share anything! <br/>👇",
+    subtitle: "From minor inconveniences that no one seems to care about<br>to ideas you think would be nice to have, please feel free to share anything! 👇",
     emailLabel: 'Email (Optional)',
     emailPlaceholder: 'Enter your email address',
     ideaLabel: 'Your Idea',
@@ -22,7 +22,7 @@ const translations = {
   },
   ko: {
     title: '당신의 문제를 알려주세요',
-    subtitle: '저는 혁신적인 앱과 웹사이트를 만들고 싶은 예비 IT CEO입니다. <br />누구도 신경 쓰지 않을 것 같은 사소한 불편함부터, 혹시 이런 게 있으면 좋겠다 싶은 아이디어까지, 뭐든 편하게 말씀해주세요! <br/>👇',
+    subtitle: "누구도 신경 쓰지 않을 것 같은 사소한 불편함부터<br>혹시 이런 게 있으면 좋겠다 싶은 아이디어까지, 뭐든 편하게 말씀해주세요! 👇",
     emailLabel: '이메일 (선택)',
     emailPlaceholder: '이메일 주소를 입력하세요',
     ideaLabel: '아이디어',
@@ -35,7 +35,7 @@ const translations = {
   },
   ja: {
     title: 'あなたの問題を教えてください',
-    subtitle: '私は革新的なアプリとウェブサイトを作りたいIT CEO志望者です。 <br />誰も気にしないような些細な不便さから、こんなのあったらいいなと思うアイデアまで、何でも気軽に教えてください！ <br/>👇',
+    subtitle: "誰も気にしないような些細な不便さから<br>こんなのあったらいいなと思うアイデアまで、何でも気軽に教えてください！ 👇",
     emailLabel: 'メール（任意）',
     emailPlaceholder: 'メールアドレスを入力してください',
     ideaLabel: 'アイデア',
@@ -48,7 +48,7 @@ const translations = {
   },
   es: {
     title: 'Cuéntame tu Problema',
-    subtitle: 'Soy un aspirante a CEO de IT que quiere crear aplicaciones y sitios web innovadores. <br />Desde pequeñas molestias que a nadie le importan hasta ideas que crees que estarían bien tener, ¡por favor comparte lo que quieras! <br/>👇',
+    subtitle: "Desde pequeñas molestias que a nadie le importan<br>hasta ideas que crees que estarían bien tener, ¡por favor comparte lo que quieras! 👇",
     emailLabel: 'Correo electrónico (opcional)',
     emailPlaceholder: 'Introduce tu correo electrónico',
     ideaLabel: 'Tu idea',
@@ -61,7 +61,7 @@ const translations = {
   },
   zh: {
     title: '告诉我你的问题',
-    subtitle: '我是一位想要创造创新应用和网站的准IT CEO。 <br />从没人会在意的微小不便到你觉得有就好了的想法，请随意分享任何内容！ <br/>👇',
+    subtitle: "从没人会在意的微小不便<br>到你觉得有就好了的想法，请随意分享任何内容！ 👇",
     emailLabel: '邮箱（可选）',
     emailPlaceholder: '请输入你的邮箱地址',
     ideaLabel: '你的想法',
