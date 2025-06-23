@@ -1,1000 +1,298 @@
-/* ===== 기본 레이아웃 및 전역 스타일 ===== */
-body {
-  font-family: sans-serif;
-  background-color: #f7f2e9;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  box-sizing: border-box;
-  padding-bottom: 120px;
-  background: #fbeee2; /* 메인 배경색 */
-}
+// import { createClient } from '@supabase/supabase-js' // 삭제
 
-/* ===== 제목 스타일 ===== */
-h1 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem); /* 반응형 폰트 크기 */
-  margin: 0px 0 20px 0;
-  padding: 0 20px;
-  text-align: center;
-}
+// Supabase 초기화
+const supabaseUrl = 'https://toxjfcqzdoxjjtiaihml.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRveGpmY3F6ZG94amp0aWFpaG1sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAwMjI0NzUsImV4cCI6MjA2NTU5ODQ3NX0.HzcsHR2TRogV8PuIB7b1KDrLJsgn096A9iuxDaPfJFA'
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 
-/* ===== 입력 폼 컨테이너 ===== */
-.input-container {
-  width: 100%;
-  max-width: 500px;
-  margin: 20px auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  position: relative;
-  z-index: 10;
-}
-
-/* ===== 입력 행 스타일 ===== */
-.input-row {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-/* ===== 입력 라벨 ===== */
-.input-label {
-  font-size: 14px;
-  color: #666;
-  margin-left: 5px;
-}
-
-/* ===== 입력 박스 ===== */
-.input-box {
-  padding: 14px;
-  font-size: 16px;
-  width: 100%;
-  border-radius: 8px;
-  border: 1px solid #007bff;
-  background-color: #ffffff;
-  box-sizing: border-box;
-  position: relative;
-  z-index: 10;
-}
-
-/* ===== 입력 박스 포커스 상태 ===== */
-.input-box:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
-}
-
-/* ===== 제출 버튼 컨테이너 ===== */
-.submit-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-  position: relative;
-  z-index: 10;
-}
-
-/* ===== 버튼 기본 스타일 ===== */
-button {
-  padding: 12px 24px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  position: relative;
-  z-index: 10;
-}
-
-/* ===== 버튼 호버 효과 ===== */
-button:hover {
-  background-color: #0056b3;
-}
-
-/* ===== 부제목 ===== */
-.subtitle {
-  margin: 0px 0;
-  font-size: clamp(1rem, 2vw, 1.125rem);
-  color: #555;
-  text-align: center;
-  padding: 0 20px;
-  line-height: 1.5;
-}
-
-/* ===== 토스트 메시지 컨테이너 ===== */
-.toast-container {
-  position: fixed;
-  top: 20px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 1000;
-}
-
-/* ===== 토스트 메시지 ===== */
-.message {
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-  padding: 15px 20px;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 500;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeIn 0.4s ease forwards;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  pointer-events: none;
-  will-change: transform, opacity;
-}
-
-/* ===== 에러 메시지 스타일 ===== */
-.message.error {
-  background-color: #fff5f5;
-  border: 1px solid #feb2b2;
-  color: #c53030;
-}
-
-/* ===== 성공 메시지 스타일 ===== */
-.message.success {
-  background-color: #f0fff4;
-  border: 1px solid #9ae6b4;
-  color: #2f855a;
-}
-
-/* ===== 페이드인 애니메이션 ===== */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
+// 언어별 번역 데이터
+const translations = {
+  en: {
+    title: 'Tell me your Problem',
+    subtitle: "From minor inconveniences that no one seems to care about<br>to ideas you think would be nice to have, please feel free to share anything! 👇",
+    emailLabel: 'Email (Optional)',
+    emailPlaceholder: 'Enter your email address',
+    ideaLabel: 'Your Idea',
+    ideaPlaceholder: 'Please type your idea or problem here...',
+    submit: 'Submit',
+    thanksTitle: 'Thank you so much!',
+    thanksMsg: 'Your valuable idea has been successfully submitted.<br>We truly appreciate your contribution.',
+    backHome: 'Back to Home',
+    socialTitle: 'This is my social media!'
+  },
+  ko: {
+    title: '당신의 문제를 알려주세요',
+    subtitle: "누구도 신경 쓰지 않을 것 같은 사소한 불편함부터<br>혹시 이런 게 있으면 좋겠다 싶은 아이디어까지, 뭐든 편하게 말씀해주세요! 👇",
+    emailLabel: '이메일 (선택)',
+    emailPlaceholder: '이메일 주소를 입력하세요',
+    ideaLabel: '아이디어',
+    ideaPlaceholder: '아이디어나 문제점을 입력해 주세요...',
+    submit: '제출하기',
+    thanksTitle: '감사합니다!',
+    thanksMsg: '소중한 아이디어가 성공적으로 제출되었습니다.<br>진심으로 감사드립니다.',
+    backHome: '처음으로',
+    socialTitle: '이것이 제 소셜 미디어입니다!'
+  },
+  ja: {
+    title: 'あなたの問題を教えてください',
+    subtitle: "誰も気にしないような些細な不便さから<br>こんなのあったらいいなと思うアイデアまで、何でも気軽に教えてください！ 👇",
+    emailLabel: 'メール（任意）',
+    emailPlaceholder: 'メールアドレスを入力してください',
+    ideaLabel: 'アイデア',
+    ideaPlaceholder: 'アイデアや問題点を入力してください...',
+    submit: '送信',
+    thanksTitle: 'ありがとうございます！',
+    thanksMsg: 'あなたの貴重なアイデアが正常に送信されました。<br>ご協力に心より感謝いたします。',
+    backHome: '最初に戻る',
+    socialTitle: '僕のソーシャルメディアです'
+  },
+  es: {
+    title: 'Cuéntame tu Problema',
+    subtitle: "Desde pequeñas molestias que a nadie le importan<br>hasta ideas que crees que estarían bien tener, ¡por favor comparte lo que quieras! 👇",
+    emailLabel: 'Correo electrónico (opcional)',
+    emailPlaceholder: 'Introduce tu correo electrónico',
+    ideaLabel: 'Tu idea',
+    ideaPlaceholder: 'Escribe tu idea o problema aquí...',
+    submit: 'Enviar',
+    thanksTitle: '¡Muchas gracias!',
+    thanksMsg: 'Tu valiosa idea se ha enviado correctamente.<br>Te agradecemos sinceramente tu contribución.',
+    backHome: 'Volver al inicio',
+    socialTitle: '¡Esta es mi red social!'
+  },
+  zh: {
+    title: '告诉我你的问题',
+    subtitle: "从没人会在意的微小不便<br>到你觉得有就好了的想法，请随意分享任何内容！ 👇",
+    emailLabel: '邮箱（可选）',
+    emailPlaceholder: '请输入你的邮箱地址',
+    ideaLabel: '你的想法',
+    ideaPlaceholder: '请在这里输入你的想法或问题...',
+    submit: '提交',
+    thanksTitle: '非常感谢！',
+    thanksMsg: '您的宝贵想法已成功提交。<br>我们由衷感谢您的贡献。',
+    backHome: '返回首页',
+    socialTitle: '这是我的社交媒体'
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+};
+
+function setLanguage(lang) {
+  const t = translations[lang];
+  document.getElementById('main-title').innerHTML = t.title;
+  document.getElementById('subtitle').innerHTML = t.subtitle;
+  document.querySelector('label[for="emailInput"]').innerText = t.emailLabel;
+  document.getElementById('emailInput').placeholder = t.emailPlaceholder;
+  document.querySelector('label[for="ideaInput"]').innerText = t.ideaLabel;
+  document.getElementById('ideaInput').placeholder = t.ideaPlaceholder;
+  document.querySelector('.submit-container button').innerText = t.submit;
+  document.querySelector('#thanks-container h2').innerText = t.thanksTitle;
+  document.querySelector('#thanks-container p').innerHTML = t.thanksMsg;
+  document.querySelector('#thanks-container button').innerText = t.backHome;
+  
+  // 소셜 미디어 문구 번역
+  const socialTitle = document.querySelector('.social-title');
+  socialTitle.textContent = t.socialTitle;
 }
 
-/* ===== 페이드아웃 애니메이션 ===== */
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
+// 드롭다운 언어 선택 UI 동작
+const langData = {
+  en: { icon: '🇺🇸', text: 'English' },
+  ko: { icon: '🇰🇷', text: '한국어' },
+  ja: { icon: '🇯🇵', text: '日本語' },
+  es: { icon: '🇪🇸', text: 'Español' },
+  zh: { icon: '🇨🇳', text: '中文' }
+};
+
+function setLangDropdownUI(lang) {
+  // 토글 버튼에 현재 언어 표시
+  const icon = langData[lang]?.icon || '';
+  const text = langData[lang]?.text || '';
+  document.getElementById('selectedLangIcon').textContent = icon;
+  document.getElementById('selectedLangText').textContent = text;
+  // 리스트에서 선택된 버튼 강조
+  document.querySelectorAll('.lang-dropdown-list .lang-btn').forEach(btn => {
+    if (btn.getAttribute('data-lang') === lang) {
+      btn.classList.add('selected');
+    } else {
+      btn.classList.remove('selected');
+    }
+  });
 }
 
-/* ===== 메시지 숨김 상태 ===== */
-.message.hide {
-  animation: fadeOut 0.4s ease forwards;
+document.addEventListener('DOMContentLoaded', function() {
+  setLanguage('en');
+  setLangDropdownUI('en');
+
+  const toggle = document.getElementById('langDropdownToggle');
+  const list = document.getElementById('langDropdownList');
+  let dropdownOpen = false;
+
+  function closeDropdown() {
+    dropdownOpen = false;
+    if (list) list.style.display = 'none';
+  }
+
+  if (toggle && list) {
+    toggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      dropdownOpen = !dropdownOpen;
+      list.style.display = dropdownOpen ? 'flex' : 'none';
+    });
+    // 바깥 클릭 시 닫기
+    document.addEventListener('click', closeDropdown);
+    list.addEventListener('click', function(e) { e.stopPropagation(); });
+  }
+
+  // 언어 버튼 클릭 이벤트 (이벤트 위임)
+  if (list) {
+    list.addEventListener('click', function(e) {
+      const btn = e.target.closest('.lang-btn');
+      if (btn) {
+        const lang = btn.getAttribute('data-lang');
+        setLanguage(lang);
+        setLangDropdownUI(lang);
+        closeDropdown();
+      }
+    });
+  }
+
+  // 사이드 메뉴가 닫힐 때 드롭다운도 닫힘
+  const sideMenu = document.getElementById('side-menu');
+  if (sideMenu) {
+    sideMenu.addEventListener('transitionend', function() {
+      if (!sideMenu.classList.contains('open')) {
+        closeDropdown();
+      }
+    });
+  }
+});
+
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
 }
 
-/* ===== 모바일 반응형 스타일 (600px 이하) ===== */
-@media (max-width: 600px) {
-  body {
-    padding: 10px;
+// 토스트 컨테이너 생성
+function createToastContainer() {
+  const container = document.createElement('div');
+  container.className = 'toast-container';
+  document.body.appendChild(container);
+  return container;
+}
+
+// 페이지 로드 시 토스트 컨테이너 생성
+let toastContainer = createToastContainer();
+
+function showMessage(message, isError = false) {
+  const messageDiv = document.createElement('div');
+  messageDiv.textContent = message;
+  messageDiv.className = `message ${isError ? 'error' : 'success'}`;
+  
+  const existingMessage = toastContainer.querySelector('.message');
+  if (existingMessage) {
+    existingMessage.classList.add('hide');
+    existingMessage.addEventListener('animationend', () => {
+      existingMessage.remove();
+    }, { once: true });
   }
   
-  .input-container {
-    padding: 0 20px;
+  toastContainer.appendChild(messageDiv);
+  
+  setTimeout(() => {
+    messageDiv.classList.add('hide');
+    messageDiv.addEventListener('animationend', () => {
+      messageDiv.remove();
+    }, { once: true });
+  }, 2000);
+}
+
+async function submitForm() {
+  const email = document.getElementById('emailInput').value.trim();
+  const idea = document.getElementById('ideaInput').value.trim();
+  
+  // 이메일이 입력된 경우에만 유효성 검사
+  if (email && !validateEmail(email)) {
+    showMessage('Please enter a valid email address.', true);
+    return;
   }
   
-  .input-box {
-    font-size: 14px;
+  if (!idea) {
+    showMessage('Please enter your idea.', true);
+    return;
   }
   
-  button {
-    width: 100%;
-  }
-}
-
-/* ===== 작은 모바일 반응형 스타일 (400px 이하) ===== */
-@media (max-width: 400px) {
-  h1 {
-    font-size: 2rem;
+  if (idea.length < 10) {
+    showMessage('Your idea should be at least 10 characters long.', true);
+    return;
   }
   
-  .subtitle {
-    font-size: 1rem;
+  try {
+    // Supabase에 데이터 저장
+    const { data, error } = await supabase
+      .from('ideas')
+      .insert([
+        { 
+          email: email || null, 
+          idea: idea 
+        }
+      ]);
+    
+    if (error) {
+      console.error('Supabase error:', error);
+      showMessage('Something went wrong. Please try again.', true);
+      return;
+    }
+    
+    // 성공 메시지 표시
+    // showMessage('Form submitted successfully!'); // 기존 메시지 주석 처리
+
+    // 폼 숨기고 감사 메시지 보여주기
+    document.getElementById('form-container').style.display = 'none';
+    document.getElementById('thanks-container').style.display = 'block';
+    document.getElementById('main-title').style.display = 'none';
+    document.getElementById('subtitle').style.display = 'none';
+
+    // 콘솔에 데이터 출력
+    console.log("👉 Form submitted to Supabase:");
+    if (email) console.log("Email:", email);
+    console.log("Idea:", idea);
+    console.log("Saved data:", data);
+    
+    // 입력 필드 초기화
+    document.getElementById('emailInput').value = '';
+    document.getElementById('ideaInput').value = '';
+    
+  } catch (error) {
+    console.error('Network error:', error);
+    showMessage('Network error. Please try again.', true);
   }
 }
 
-/* ===== 가로 스크롤 방지 ===== */
-html, body {
-  overflow-x: hidden;
-}
-
-/* ===== 푸터 스타일 ===== */
-.footer {
-  background-color: #fbeee2 !important;
-  gap: 0;
-  left: 0;
-  right: 0;
-  margin: 0;
-  padding: 0 40px; /* 기본 좌우 패딩으로 변경 */
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between; /* space-between으로 변경하여 양쪽 정렬 */
-  align-items: center; /* 수직 중앙 정렬 */
-  color: #666;
-  width: 100vw;
-  box-sizing: border-box;
-  z-index: 0;
-  min-height: 0;
-  height: 72px; /* 푸터 높이를 0.9배로 조정 (80px -> 72px) */
-}
-
-/* ===== 푸터 내부 요소 정렬 ===== */
-.footer > * {
-  flex: 0 1 auto;
-}
-
-/* ===== 저작권 텍스트 ===== */
-.copyright {
-  font-size: 16px; /* 폰트 크기를 0.9배로 조정 (18px -> ~16px) */
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  height: 100%;
-  white-space: pre-line; /* 줄바꿈 허용 */
-  margin-left: 10vw; /* 왼쪽 마진 추가하여 간격 조정 */
-}
-
-/* ===== 소셜 미디어 섹션 ===== */
-.social-section {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 14px; /* 간격을 0.9배로 조정 (15px -> ~14px) */
-  width: auto !important;
-  margin-left: 0 !important;
-  justify-content: center;
-  height: 100%;
-  padding: 0;
-  margin-right: 10vw; /* 오른쪽 마진 추가하여 간격 조정 */
-}
-
-/* ===== 소셜 미디어 제목 ===== */
-.social-title {
-  font-size: 16px; /* 폰트 크기를 0.9배로 조정 (18px -> ~16px) */
-  color: #666;
-  margin: 0;
-  font-weight: 500;
-  text-align: right;
-}
-
-/* ===== 소셜 미디어 아이콘 컨테이너 ===== */
-.social-icons {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  gap: 14px; /* 아이콘 간격을 0.9배로 조정 (15px -> ~14px) */
-  width: 100%;
-}
-
-/* ===== 소셜 미디어 링크 ===== */
-.social-link {
-  color: #fff;
-  font-size: 20px; /* 아이콘 폰트 크기를 키워 중심이 잘 맞아보이도록 조정 */
-  transition: all 0.3s ease;
-  width: 36px; /* 아이콘 너비를 0.9배로 조정 (40px -> 36px) */
-  height: 36px; /* 아이콘 높이를 0.9배로 조정 (40px -> 36px) */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: #007bff;
-  text-decoration: none;
-}
-
-.social-link i {
-  line-height: 1; /* 아이콘 자체의 줄 높이를 조정하여 수직 정렬을 미세하게 보정합니다. */
-}
-
-/* ===== 소셜 미디어 링크 호버 효과 ===== */
-.social-link:hover {
-  color: #fff;
-  background-color: #0056b3;
-  transform: translateY(-2px);
-}
-
-/* ===== 모바일 푸터 반응형 ===== */
-@media (max-width: 600px) {
-  .footer {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-  }
-  
-  .social-section {
-    order: -1;
+// 보너스: 관리자용 데이터 조회 함수
+async function getAllIdeas() {
+  try {
+    const { data, error } = await supabase
+      .from('ideas')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) {
+      console.error('Error fetching ideas:', error);
+      return;
+    }
+    
+    console.log('All ideas:', data);
+    return data;
+  } catch (error) {
+    console.error('Network error:', error);
   }
 }
 
-/* ===== 감사 메시지 컨테이너 ===== */
-#thanks-container h2 {
-  font-size: 2.8rem;
-  margin: 40px 0 20px 0;
-  color: #007bff;
-  font-weight: bold;
-}
-
-#thanks-container p {
-  font-size: 1.5rem;
-  margin-bottom: 40px;
-  color: #333;
-}
-
-#thanks-container button {
-  font-size: 1.05rem;
-  padding: 13px 28px;
-  border-radius: 12px;
-  background: #007bff;
-  color: #fff;
-  font-weight: bold;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  transition: background 0.2s;
-}
-
-#thanks-container button:hover {
-  background: #007bff;
-}
-
-/* ===== 메인 로고 ===== */
-.main-logo {
-  display: block;
-  margin: 20px auto 8px auto;
-  width: 100px;
-  height: 100px;
-  image-rendering: pixelated;
-}
-
-/* ===== 메인 헤더 ===== */
-.main-header {
-  width: 100%;
-  background: #fff; /* 흰색 배경 */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 9px 0 9px 0;
-  margin-top: 0;
-  position: relative;
-  z-index: 10;
-}
-
-/* ===== 헤더 가상 요소 (사용 안함) ===== */
-.main-header::before {
-  content: '';
-  display: none;
-}
-
-/* ===== 헤더 왼쪽 영역 ===== */
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-left: 380px;
-}
-
-.header-logo-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: inherit;
-  padding: 4px 8px;
-  border-radius: 8px;
-  transition: background-color 0.2s;
-}
-
-.header-logo-link:hover {
-  background-color: #f0f0f0; /* 호버 시 배경색 변경 */
-}
-
-/* ===== 헤더 로고 ===== */
-.header-logo {
-  width: 30px;
-  height: 30px;
-}
-
-/* ===== 헤더 제목 ===== */
-.header-title {
-  font-size: 0.95rem;
-  font-weight: normal;
-  color: #222; /* 검은색 텍스트 */
-  line-height: 1; /* 텍스트의 수직 정렬을 위해 line-height를 조정합니다. */
-}
-
-/* ===== 헤더 오른쪽 영역 ===== */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-right: 380px;
-}
-
-/* ===== 헤더 버튼 기본 스타일 ===== */
-.header-btn {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: background 0.2s, border 0.2s;
-  height: 36px;
-  min-width: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ===== 구독 버튼 스타일 ===== */
-.header-btn.subscribe, .subscribe-btn {
-  background: #007bff;
-  color: #fff;
-  border: none;
-  min-width: 90px;
-}
-
-/* ===== 헤더 버튼 호버 효과 ===== */
-.header-btn:hover {
-  background: #f0f0f0;
-}
-
-/* ===== 구독 버튼 호버 효과 ===== */
-.header-btn.subscribe:hover, .subscribe-btn:hover {
-  background: #0056b3;
-}
-
-/* ===== 메뉴 버튼 ===== */
-.header-btn.menu-btn {
-  background: #fff;
-  color: #222;
-  border: 1px solid #ddd;
-  padding: 0;
-  font-size: 1.1rem;
-  border-radius: 8px;
-  width: 36px;
-  height: 36px;
-  min-width: unset;
-}
-
-/* ===== 메뉴 버튼 호버 효과 ===== */
-.header-btn.menu-btn:hover {
-  background: #f0f0f0;
-}
-
-/* ===== 헤더 언어 선택 ===== */
-.header-lang-select {
-  font-size: 0.95rem;
-  padding: 4px 8px 4px 28px;
-  border-radius: 7px;
-  border: 1px solid #ccc;
-  background: url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/icons/translate.svg') no-repeat 6px center/16px 16px, #fff;
-  appearance: none;
-  outline: none;
-  cursor: pointer;
-  min-width: 80px;
-  font-weight: normal;
-}
-
-/* ===== 사이드 메뉴 ===== */
-.side-menu {
-  position: fixed;
-  top: 0;
-  right: -300px;
-  width: 260px;
-  height: 100vh;
-  background: #fff;
-  box-shadow: -2px 0 12px rgba(0,0,0,0.08);
-  z-index: 2000;
-  transition: right 0.3s cubic-bezier(.4,0,.2,1);
-  display: flex;
-  flex-direction: column;
-  padding: 24px 20px 20px 20px;
-}
-
-/* ===== 사이드 메뉴 열림 상태 ===== */
-.side-menu.open {
-  right: 0;
-}
-
-/* ===== 사이드 메뉴 콘텐츠 ===== */
-.side-menu-content {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 32px;
-}
-
-/* ===== 사이드 메뉴 닫기 버튼 ===== */
-.close-menu-btn {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: #888;
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: background 0.2s, color 0.2s, transform 0.15s;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ===== 사이드 메뉴 닫기 버튼 호버 효과 ===== */
-.close-menu-btn:hover {
-  background: #f0f0f0;
-  color: #222;
-  transform: scale(1.12);
-}
-
-/* ===== 사이드 메뉴 배경 ===== */
-.side-menu-backdrop {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.15);
-  z-index: 1500;
-}
-
-/* ===== 사이드 언어 선택 ===== */
-.side-lang-select {
-  font-size: 1rem;
-  padding: 6px 10px 6px 32px;
-  border-radius: 7px;
-  border: 1px solid #ccc;
-  background: url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/icons/translate.svg') no-repeat 8px center/16px 16px, #fff;
-  appearance: none;
-  outline: none;
-  cursor: pointer;
-  min-width: 100px;
-  font-weight: normal;
-}
-
-/* ===== 언어 버튼 그룹 ===== */
-.lang-btn-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-/* ===== 언어 버튼 ===== */
-.lang-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: #f9f9f9;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s, border 0.2s, color 0.2s;
-  color: #222;
-}
-
-/* ===== 언어 버튼 선택/호버 상태 ===== */
-.lang-btn.selected, .lang-btn:hover {
-  background: #007bff;
-  color: #fff;
-  border: 1px solid #007bff;
-}
-
-/* ===== 언어 버튼 아이콘 ===== */
-.lang-btn span {
-  font-size: 1.2rem;
-}
-
-/* ===== 언어 드롭다운 컨테이너 ===== */
-.lang-dropdown {
-  position: relative;
-  width: 100%;
-  z-index: 3001;
-}
-
-/* ===== 언어 드롭다운 토글 버튼 ===== */
-.lang-dropdown-toggle {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 16px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: #fff;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s, border 0.2s;
-  color: #222;
-  z-index: 3002;
-  position: relative;
-}
-
-/* ===== 언어 드롭다운 토글 포커스 ===== */
-.lang-dropdown-toggle:focus {
-  outline: 2px solid #007bff;
-}
-
-/* ===== 언어 드롭다운 토글 호버 ===== */
-.lang-dropdown-toggle:hover {
-  background: #007bff; 
-  color: #fff;
-}
-
-/* ===== 언어 드롭다운 리스트 ===== */
-.lang-dropdown-list {
-  position: absolute;
-  top: 110%;
-  left: 0;
-  width: 100%;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  z-index: 3003;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 6px 0;
-  max-height: 240px;
-  overflow-y: auto;
-  min-width: 180px;
-}
-
-/* ===== 언어 드롭다운 리스트 버튼 ===== */
-.lang-dropdown-list .lang-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border: none;
-  border-radius: 0;
-  background: none;
-  width: 100%;
-  text-align: left;
-  padding: 8px 16px;
-  font-size: 1rem;
-  color: #222;
-  line-height: 1.2;
-  transition: background 0.18s, color 0.18s;
-  cursor: pointer;
-}
-
-/* ===== 언어 드롭다운 리스트 버튼 선택/호버 ===== */
-.lang-dropdown-list .lang-btn.selected,
-.lang-dropdown-list .lang-btn:hover {
-  background: #007bff;
-  color: #fff;
-  border-radius: 0;
-}
-
-/* ===== 언어 드롭다운 리스트 버튼 아이콘 ===== */
-.lang-dropdown-list .lang-btn span {
-  display: inline-block;
-  width: 22px;
-  height: 22px;
-  font-size: 1.2rem;
-  line-height: 1;
-  object-fit: contain;
-}
-
-/* ===== 하단 흰색 박스 ===== */
-.bottom-white-box {
-  width: 100%;
-  background: #fff;
-  border-radius: 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  padding: 0 0;
-  text-align: center;
-  font-size: 1.3rem;
-  margin-top: 0;
-  flex-shrink: 0;
-}
-
-/* ===== 큰 박스 (임시) ===== */
-.big-box {
-  width: 80%;
-  height: 800px;
-  margin: 40px auto;
-  background: #e0e0e0;
-  border-radius: 24px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ===== 큰 박스 텍스트 스타일 ===== */
-.big-box {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #444;
-  letter-spacing: 2px;
-}
-
-/* ===== 기본 HTML/BODY 설정 ===== */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ===== 메인 콘텐츠 ===== */
-.main-content {
-  flex: 1 0 auto;
-}
-
-/* ===== 푸터 기본 설정 ===== */
-.footer {
-  flex-shrink: 0;
-}
-
-/* ===== 헤더 스타일 (중복 제거용) ===== */
-.header {
-  /* 기존 .main-header와 동일한 스타일 */
-}
-
-/* ===== 헤더 왼쪽 영역 (중복 제거용) ===== */
-.header-left {
-  /* 기존과 동일 */
-}
-
-/* ===== 헤더 로고 (중복 제거용) ===== */
-.header-logo {
-  /* 기존과 동일 */
-}
-
-/* ===== 헤더 제목 (중복 제거용) ===== */
-.header-title {
-  /* 기존과 동일 */
-}
-
-/* ===== 헤더 광고 (사용 안함) ===== */
-.header-advertise {
-  margin-left: 24px;
-  color: #888;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-/* ===== 헤더 오른쪽 영역 (중복 제거용) ===== */
-.header-right {
-  /* 기존과 동일 */
-}
-
-/* ===== 헤더 버튼 (중복 제거용) ===== */
-.header-btn {
-  /* 기존과 동일 */
-}
-
-/* ===== 구독 버튼 (중복 제거용) ===== */
-.header-btn.subscribe, .subscribe-btn {
-  /* 기존과 동일 */
-}
-
-/* ===== 구독 버튼 호버 (중복 제거용) ===== */
-.header-btn.subscribe:hover, .subscribe-btn:hover {
-  /* 기존과 동일 */
-}
-
-/* ===== 로그인 버튼 ===== */
-.header-btn.login {
-  background: #fff;
-  color: #222;
-  border: 1px solid #ddd;
-}
-
-/* ===== 메인 섹션 (사용 안함) ===== */
-.main-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 48px;
-  margin-bottom: 32px;
-}
-
-/* ===== 메인 로고 섹션 (사용 안함) ===== */
-.main-logo-section {
-  width: 90px;
-  height: 90px;
-  margin-bottom: 12px;
-}
-
-/* ===== 메인 제목 섹션 (사용 안함) ===== */
-.main-title-section {
-  font-size: 3.2rem;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #222;
-}
-
-/* ===== 메인 설명 섹션 (사용 안함) ===== */
-.main-desc-section {
-  font-size: 1.2rem;
-  color: #222;
-  text-align: center;
-  max-width: 600px;
-  margin-bottom: 24px;
-}
-
-/* ===== 구독 폼 (사용 안함) ===== */
-.subscribe-form {
-  display: flex;
-  gap: 0;
-  margin-bottom: 24px;
-}
-
-/* ===== 이메일 입력 (사용 안함) ===== */
-.email-input {
-  padding: 12px 16px;
-  font-size: 1.1rem;
-  border: 2px solid #dbeafe;
-  border-radius: 8px 0 0 8px;
-  outline: none;
-  min-width: 280px;
-}
-
-/* ===== 구독 버튼 (사용 안함) ===== */
-.subscribe-btn {
-  padding: 12px 24px;
-  font-size: 1.1rem;
-  border-radius: 0 8px 8px 0;
-  border: 2px solid #007bff;
-  background: #007bff;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* ===== 소셜 섹션 (사용 안함) ===== */
-.socials-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-/* ===== 소셜 아이콘 섹션 (사용 안함) ===== */
-.social-icons-section {
-  display: flex;
-  gap: 16px;
-  margin-top: 4px;
-}
-
-/* ===== 소셜 버튼 (사용 안함) ===== */
-.social-btn {
-  background: #e3eafc;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  color: #2563eb;
-  transition: background 0.2s, color 0.2s;
-}
-
-/* ===== 소셜 버튼 호버 (사용 안함) ===== */
-.social-btn:hover {
-  background: #007bff;
-  color: #fff;
-}
-
-/* ===== 포스트 영역 (비어있음) ===== */
-.posts {
-  min-height: 120px;
-  margin: 32px 0;
-}
-
-/* ===== 푸터 (중복 제거용) ===== */
-.footer {
-  background: #fff;
-  border-top: 1px solid #eee;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 32px 8vw 24px 8vw;
-  margin-top: 48px;
-  flex-wrap: wrap;
-}
-
-/* ===== 푸터 왼쪽 ===== */
-.footer-left {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-}
-
-/* ===== 푸터 로고 ===== */
-.footer-logo {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-}
-
-/* ===== 푸터 중앙 ===== */
-.footer-center {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 120px;
-}
-
-/* ===== 푸터 오른쪽 ===== */
-.footer-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 12px;
-}
-
-/* ===== 푸터 구독 폼 ===== */
-.footer-subscribe {
-  display: flex;
-  gap: 0;
-}
-
-/* ===== 푸터 링크 ===== */
-.footer-links {
-  display: flex;
-  gap: 12px;
-  font-size: 0.95rem;
-  color: #888;
-  margin-top: 8px;
-}
-
-/* ===== 푸터 링크 앵커 ===== */
-.footer-links a {
-  color: #888;
-  text-decoration: underline;
-}
-
-/* ===== 푸터 링크 스팬 ===== */
-.footer-links span {
-  color: #bbb;
-}
-
-/* ===== 모바일 푸터 반응형 (900px 이하) ===== */
-@media (max-width: 900px) {
-  .footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    padding: 32px 4vw 24px 4vw;
-  }
-  
-  .footer-right {
-    align-items: flex-start;
-  }
-}
-
-/* ===== 사용하지 않는 스타일 초기화 ===== */
-.main-section, .main-logo-section, .main-title-section, .main-desc-section, .subscribe-form, .email-input, .subscribe-btn, .socials-section, .social-icons-section, .social-btn {
-  all: unset;
-}
+// goHome 함수 추가
+function goHome() {
+  document.getElementById('thanks-container').style.display = 'none';
+  document.getElementById('form-container').style.display = 'block';
+  document.getElementById('main-title').style.display = 'block';
+  document.getElementById('subtitle').style.display = 'block';
+}
+
+window.submitForm = submitForm;
+window.goHome = goHome; 
